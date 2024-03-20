@@ -14,65 +14,65 @@ import java.util.Set;
 import static org.cyrano.dsa.graph.impl.Homework.CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK;
 
 @RequiredArgsConstructor
-public class GraphAdjacencyListDirectedDouble implements Graph {
+public class GraphAdjacencyListDirectedDouble<NODE> implements Graph<NODE> {
 
-    private final Map<Integer, Edges> nodeById = new HashMap<>();
+    private final Map<NODE, Edges<NODE>> edgesByNode = new HashMap<>();
 
     // --------------------------------------------------------------------------------
 
-    private static class Edges {
-        Set<Edge> sourceEdges = new HashSet<>();
-        Set<Edge> targetEdges = new HashSet<>();
+    private static class Edges<NODE> {
+        Set<Edge<NODE>> sourceEdges = new HashSet<>();
+        Set<Edge<NODE>> targetEdges = new HashSet<>();
     }
 
     // --------------------------------------------------------------------------------
 
     @Override
-    public void insertNode(int node) {
-        nodeById.put(node, new Edges());
+    public void insertNode(NODE node) {
+        edgesByNode.put(node, new Edges<>());
     }
 
     @Override
-    public void deleteNode(int node) {
+    public void deleteNode(NODE node) {
         throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
     }
 
     // --------------------------------------------------------------------------------
 
     @Override
-    public void insertEdge(int source, int target, double weight) {
-        Edges sourceAdjacent = getAdjacent(source, true);
-        Edges targetAdjacent = getAdjacent(target, true);
-
+    public void insertEdge(NODE source, NODE target, double weight) {
         if (weight <= 0) {
             throw new IllegalArgumentException("weight=" + weight);
         }
 
-        Edge edge = new Edge(source, target, weight);
+        Edge<NODE> edge = new Edge<>(source, target, weight);
 
+        Edges<NODE> sourceAdjacent = getAdjacent(source, true);
         sourceAdjacent.sourceEdges.add(edge); // --->
+
+        Edges<NODE> targetAdjacent = getAdjacent(target, true);
         targetAdjacent.targetEdges.add(edge); // <---
     }
 
     @Override
-    public void insertEdge(int source, int target) {
+    public void insertEdge(NODE source, NODE target) {
         insertEdge(source, target, DEFAULT_WEIGHT);
     }
 
     @Override
-    public void deleteEdge(int source, int target) {
+    public void deleteEdge(NODE source, NODE target) {
         throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
     }
 
     // --------------------------------------------------------------------------------
 
     @Override
-    public Iterator<Integer> nodes() {
-        return nodeById.keySet().iterator();
+    public Iterator<NODE> nodes() {
+        return edgesByNode.keySet().iterator();
     }
 
     @Override
-    public Iterator<Edge> adjacent(int node, Direction direction) {
+    public Iterator<Edge<NODE>> adjacent(NODE node, Direction direction) {
         switch (direction) {
             case SOURCE_TO_TARGET:
                 return getAdjacent(node, true).sourceEdges.iterator();
@@ -85,8 +85,8 @@ public class GraphAdjacencyListDirectedDouble implements Graph {
 
     // --------------------------------------------------------------------------------
 
-    private Edges getAdjacent(int node, boolean throwExceptionIfNot) {
-        Edges nodeEdges = nodeById.get(node);
+    private Edges<NODE> getAdjacent(NODE node, boolean throwExceptionIfNot) {
+        Edges<NODE> nodeEdges = edgesByNode.get(node);
 
         if (throwExceptionIfNot && nodeEdges == null) {
             throw new IllegalArgumentException("node=" + node + ", not found");

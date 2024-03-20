@@ -4,7 +4,7 @@ import org.cyrano.dsa.graph.interfaces.Edge;
 
 import java.util.Iterator;
 
-public class IteratorEdgeSource implements Iterator<Edge> {
+public class IteratorEdgeSource implements Iterator<Edge<Integer>> {
 
     private final double[][] adjacencyMatrix;
 
@@ -48,8 +48,8 @@ public class IteratorEdgeSource implements Iterator<Edge> {
     // --------------------------------------------------------------------------------
 
     @Override
-    public Edge next() {
-        Edge ret = new Edge(source, curNextIndex, adjacencyMatrix[source][curNextIndex]);
+    public Edge<Integer> next() {
+        Edge<Integer> ret = new Edge<>(source, curNextIndex, adjacencyMatrix[source][curNextIndex]);
 
         advancePointers();
 

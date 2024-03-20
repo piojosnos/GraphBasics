@@ -2,29 +2,29 @@ package org.cyrano.dsa.graph.interfaces;
 
 import java.util.Iterator;
 
-public interface Graph {
+public interface Graph<NODE> {
 
     int DEFAULT_WEIGHT = 1;
 
     // --------------------------------------------------------------------------------
 
-    void insertNode(int node);
+    void insertNode(NODE node);
 
-    void deleteNode(int node);
-
-    // --------------------------------------------------------------------------------
-
-    void insertEdge(int source, int target, double weight);
-
-    void insertEdge(int source, int target);
-
-    void deleteEdge(int source, int target);
+    void deleteNode(NODE node);
 
     // --------------------------------------------------------------------------------
 
-    Iterator<Integer> nodes();
+    void insertEdge(NODE source, NODE target, double weight);
 
-    Iterator<Edge> adjacent(int node, Direction direction);
+    void insertEdge(NODE source, NODE target);
+
+    void deleteEdge(NODE source, NODE target);
+
+    // --------------------------------------------------------------------------------
+
+    Iterator<NODE> nodes();
+
+    Iterator<Edge<NODE>> adjacent(NODE node, Direction direction);
 
     // --------------------------------------------------------------------------------
 

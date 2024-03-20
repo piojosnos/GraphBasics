@@ -13,38 +13,38 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 @RequiredArgsConstructor
-public class GraphWrapper {
+public class GraphWrapper<NODE> {
 
-    private final Graph graph;
+    private final Graph<NODE> graph;
 
     // --------------------------------------------------------------------------------
     // TDL - Nodes
     // --------------------------------------------------------------------------------
 
-    public void insertNodes(Integer... nodes) {
-        for (Integer node : nodes) {
+    public void insertNodes(NODE... nodes) {
+        for (NODE node : nodes) {
             graph.insertNode(node);
         }
     }
 
     // --------------------------------------------------------------------------------
 
-    public void assertNodes(Integer... expNodes) {
-        List<Integer> actNodes = nodes();
+    public void assertNodes(NODE... expNodes) {
+        List<NODE> actNodes = nodes();
 
         assertEquals(expNodes.length, actNodes.size());
 
-        for (Integer node : expNodes) {
+        for (NODE node : expNodes) {
             assertTrue("Expected to contain " + node, actNodes.contains(node));
         }
     }
 
     // --------------------------------------------------------------------------------
 
-    public List<Integer> nodes() {
-        List<Integer> ret = new ArrayList<>();
+    public List<NODE> nodes() {
+        List<NODE> ret = new ArrayList<>();
 
-        Iterator<Integer> itt = graph.nodes();
+        Iterator<NODE> itt = graph.nodes();
 
         while (itt.hasNext()) {
             ret.add(itt.next());
@@ -57,38 +57,40 @@ public class GraphWrapper {
     // TDL - Edges
     // --------------------------------------------------------------------------------
 
-    public EdgeSourceOrTarget edge(int node, int weight) {
-        return new EdgeSourceOrTarget(node, weight);
+    public EdgeSourceOrTarget<NODE> edge(NODE node, int weight) {
+        return new EdgeSourceOrTarget<>(node, weight);
     }
 
-    public EdgeSourceOrTarget edge(int node) {
+    public EdgeSourceOrTarget<NODE> edge(NODE node) {
         return edge(node, Graph.DEFAULT_WEIGHT);
     }
 
     // --------------------------------------------------------------------------------
 
-    public void insertEdges(Integer source, EdgeSourceOrTarget... edgeTargets) {
-        for (EdgeSourceOrTarget edgeTarget : edgeTargets) {
+    public void insertEdges(NODE source, EdgeSourceOrTarget<NODE>... edgeTargets) {
+        for (EdgeSourceOrTarget<NODE> edgeTarget : edgeTargets) {
             graph.insertEdge(source, edgeTarget.node(), edgeTarget.weight());
         }
     }
 
     // --------------------------------------------------------------------------------
 
-    public void assertAdjacent(Integer node, Direction direction, EdgeSourceOrTarget... expEdges) {
-        List<Edge> actEdges = adjacent(node, direction);
+    public void assertAdjacent(
+            NODE node, Direction direction, EdgeSourceOrTarget<NODE>... expEdges) {
+
+        List<Edge<NODE>> actEdges = adjacent(node, direction);
 
         assertEquals(expEdges.length, actEdges.size());
 
-        for (EdgeSourceOrTarget edgeSourceOrTarget : expEdges) {
-            Edge edge;
+        for (EdgeSourceOrTarget<NODE> edgeSourceOrTarget : expEdges) {
+            Edge<NODE> edge;
 
             switch (direction) {
                 case SOURCE_TO_TARGET:
-                    edge = new Edge(node, edgeSourceOrTarget.node(), edgeSourceOrTarget.weight());
+                    edge = new Edge<>(node, edgeSourceOrTarget.node(), edgeSourceOrTarget.weight());
                     break;
                 case TARGET_TO_SOURCE:
-                    edge = new Edge(edgeSourceOrTarget.node(), node, edgeSourceOrTarget.weight());
+                    edge = new Edge<>(edgeSourceOrTarget.node(), node, edgeSourceOrTarget.weight());
                     break;
                 default:
                     throw new IllegalArgumentException(direction.toString());
@@ -100,10 +102,10 @@ public class GraphWrapper {
 
     // --------------------------------------------------------------------------------
 
-    public List<Edge> adjacent(int node, Direction direction) {
-        List<Edge> ret = new ArrayList<>();
+    public List<Edge<NODE>> adjacent(NODE node, Direction direction) {
+        List<Edge<NODE>> ret = new ArrayList<>();
 
-        Iterator<Edge> itt = graph.adjacent(node, direction);
+        Iterator<Edge<NODE>> itt = graph.adjacent(node, direction);
 
         while (itt.hasNext()) {
             ret.add(itt.next());

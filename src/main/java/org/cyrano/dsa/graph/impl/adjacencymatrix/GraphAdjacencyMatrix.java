@@ -9,7 +9,7 @@ import java.util.Iterator;
 
 import static org.cyrano.dsa.graph.impl.Homework.CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK;
 
-public class GraphAdjacencyMatrix implements Graph {
+public class GraphAdjacencyMatrix implements Graph<Integer> {
 
     private final double[][] adjacencyMatrix;
 
@@ -35,21 +35,21 @@ public class GraphAdjacencyMatrix implements Graph {
     // --------------------------------------------------------------------------------
 
     @Override
-    public void insertNode(int node) {
+    public void insertNode(Integer node) {
         nodeExist(node, false);
 
         nodes[node] = true;
     }
 
     @Override
-    public void deleteNode(int node) {
+    public void deleteNode(Integer node) {
         throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
     }
 
     // --------------------------------------------------------------------------------
 
     @Override
-    public void insertEdge(int source, int target, double weight) {
+    public void insertEdge(Integer source, Integer target, double weight) {
         nodeExist(source, true);
         nodeExist(target, true);
 
@@ -61,12 +61,12 @@ public class GraphAdjacencyMatrix implements Graph {
     }
 
     @Override
-    public void insertEdge(int source, int target) {
+    public void insertEdge(Integer source, Integer target) {
         insertEdge(source, target, DEFAULT_WEIGHT);
     }
 
     @Override
-    public void deleteEdge(int source, int target) {
+    public void deleteEdge(Integer source, Integer target) {
         throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
     }
 
@@ -78,7 +78,7 @@ public class GraphAdjacencyMatrix implements Graph {
     }
 
     @Override
-    public Iterator<Edge> adjacent(int node, Direction direction) {
+    public Iterator<Edge<Integer>> adjacent(Integer node, Direction direction) {
         switch (direction) {
             case SOURCE_TO_TARGET:
                 return new IteratorEdgeSource(adjacencyMatrix, node);
@@ -91,7 +91,7 @@ public class GraphAdjacencyMatrix implements Graph {
 
     // --------------------------------------------------------------------------------
 
-    private boolean nodeExist(int node, boolean throwExceptionIfNot) {
+    private boolean nodeExist(Integer node, boolean throwExceptionIfNot) {
         if (node < 0 || node >= adjacencyMatrix.length) {
             throw new ArrayIndexOutOfBoundsException(
                     "node < 0 || node >= " + adjacencyMatrix.length + ", node=" + node);

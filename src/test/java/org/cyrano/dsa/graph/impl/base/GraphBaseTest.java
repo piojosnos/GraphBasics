@@ -8,32 +8,32 @@ import org.cyrano.dsa.graph.interfaces.Graph;
 import org.junit.Before;
 
 @RequiredArgsConstructor
-public abstract class GraphBaseTest {
+public abstract class GraphBaseTest<NODE> {
 
-    private GraphWrapper wrapper;
+    private GraphWrapper<NODE> wrapper;
 
     // --------------------------------------------------------------------------------
     // Init
     // --------------------------------------------------------------------------------
 
-    protected abstract Graph createGraph();
+    protected abstract Graph<NODE> createGraph();
 
     @Before
     public void before() {
-        wrapper = new GraphWrapper(createGraph());
+        wrapper = new GraphWrapper<>(createGraph());
     }
 
     // --------------------------------------------------------------------------------
     // TDL - Nodes
     // --------------------------------------------------------------------------------
 
-    protected void insertNodes(Integer... nodes) {
+    protected void insertNodes(NODE... nodes) {
         wrapper.insertNodes(nodes);
     }
 
     // --------------------------------------------------------------------------------
 
-    protected void assertNodes(Integer... expNodes) {
+    protected void assertNodes(NODE... expNodes) {
         wrapper.assertNodes(expNodes);
     }
 
@@ -41,20 +41,20 @@ public abstract class GraphBaseTest {
     // TDL - Edges
     // --------------------------------------------------------------------------------
 
-    protected EdgeSourceOrTarget edge(int node) {
+    protected EdgeSourceOrTarget<NODE> edge(NODE node) {
         return wrapper.edge(node);
     }
 
     // --------------------------------------------------------------------------------
 
-    protected void insertEdges(Integer source, EdgeSourceOrTarget... edgeTargets) {
+    protected void insertEdges(NODE source, EdgeSourceOrTarget<NODE>... edgeTargets) {
         wrapper.insertEdges(source, edgeTargets);
     }
 
     // --------------------------------------------------------------------------------
 
     protected void assertAdjacent(
-            Integer node, Direction direction, EdgeSourceOrTarget... expEdges) {
+            NODE node, Direction direction, EdgeSourceOrTarget<NODE>... expEdges) {
 
         wrapper.assertAdjacent(node, direction, expEdges);
     }

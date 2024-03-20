@@ -4,7 +4,8 @@ import org.junit.Test;
 
 import static org.cyrano.dsa.graph.interfaces.Direction.SOURCE_TO_TARGET;
 
-public abstract class GraphBaseTestUndirected extends GraphBaseTest {
+@SuppressWarnings("unchecked")
+public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
     @Test
     public void no_nodes() {

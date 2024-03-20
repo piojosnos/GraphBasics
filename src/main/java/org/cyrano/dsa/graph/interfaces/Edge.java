@@ -4,16 +4,16 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
-@EqualsAndHashCode()
+@EqualsAndHashCode
 @Getter
 @RequiredArgsConstructor
-public class Edge {
+public class Edge<NODE> {
 
     @EqualsAndHashCode.Include
-    private final int source;
+    private final NODE source;
 
     @EqualsAndHashCode.Include
-    private final int target;
+    private final NODE target;
 
     @EqualsAndHashCode.Exclude
     private final double weight;

@@ -1,5 +1,5 @@
 package org.cyrano.dsa.graph.impl.base.wrapper;
 
-public record EdgeSourceOrTarget(int node, double weight) {
+public record EdgeSourceOrTarget<NODE>(NODE node, double weight) {
     // Empty
 }
