@@ -113,4 +113,10 @@ public class GraphWrapper<NODE> {
 
         return ret;
     }
+
+    // --------------------------------------------------------------------------------
+
+    public Graph<NODE> getGraph() {
+        return graph;
+    }
 }

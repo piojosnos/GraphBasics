@@ -1,9 +1,15 @@
 package org.cyrano.dsa.graph.traversals.impl.dfs;
 
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 @Getter
+@EqualsAndHashCode
+//@NoArgsConstructor
+//@AllArgsConstructor
 public class DFSNodeMetadata<NODE> {
 
     private boolean disc;
@@ -24,5 +30,20 @@ public class DFSNodeMetadata<NODE> {
     void proc(MutableInt time) {
         proc = true;
         endTime = time.incrementAndGet();
+    }
+
+    @Override
+    public String toString() {
+        String ret = "";
+
+        ret += disc + ", ";
+        ret += proc + ", ";
+
+        ret += parent + ", ";
+
+        ret += begTime + ", ";
+        ret += endTime;
+
+        return "{" + ret + "}";
     }
 }

@@ -1,14 +1,23 @@
 package org.cyrano.dsa.graph.traversals.impl.dfs;
 
+import lombok.Getter;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.cyrano.dsa.graph.interfaces.Direction;
 import org.cyrano.dsa.graph.interfaces.Edge;
 import org.cyrano.dsa.graph.interfaces.Graph;
+import org.cyrano.dsa.graph.traversals.interfaces.Traversal;
 import org.cyrano.dsa.graph.traversals.interfaces.Visitor;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
-public class DFSRec<NODE> extends DFSBase<NODE> {
+public class DFSRec<NODE> /*extends DFSBase<NODE>*/ implements Traversal<NODE, DFSNodeMetadata<NODE>> {
+
+    @Getter
+    private NodeMetadataMap<NODE> nodeNodeMetadataMap = new NodeMetadataMap<>();
+
+    protected NODE begNode;
 
     @Override
     public void traverse(Graph<NODE> graph, Visitor<NODE> visitor, NODE begNode) {
@@ -16,14 +25,14 @@ public class DFSRec<NODE> extends DFSBase<NODE> {
 
         MutableInt time = new MutableInt(0);
 
-        DFSNodeMetadata<NODE> nodeMetadata = getNodeMetadata(begNode);
+        DFSNodeMetadata<NODE> nodeMetadata = nodeNodeMetadataMap.getNodeMetadata(begNode);
         nodeMetadata.disc(time, null);
 
         traverseInternal(graph, visitor, begNode, time);
     }
 
     private void traverseInternal(Graph<NODE> graph, Visitor<NODE> visitor, NODE currNode, MutableInt time) {
-        DFSNodeMetadata<NODE> currNodeMetadata = getNodeMetadata(currNode);
+        DFSNodeMetadata<NODE> currNodeMetadata = nodeNodeMetadataMap.getNodeMetadata(currNode);
 
         visitor.preVisit(currNode);
 
@@ -32,7 +41,7 @@ public class DFSRec<NODE> extends DFSBase<NODE> {
         while (itt.hasNext()) {
             Edge<NODE> edge = itt.next();
 
-            DFSNodeMetadata<NODE> nextNodeMetadata = getNodeMetadata(edge.getTarget());
+            DFSNodeMetadata<NODE> nextNodeMetadata = nodeNodeMetadataMap.getNodeMetadata(edge.getTarget());
 
             if (!nextNodeMetadata.isDisc()) {
                 nextNodeMetadata.disc(time, currNode);
@@ -49,4 +58,24 @@ public class DFSRec<NODE> extends DFSBase<NODE> {
 
         visitor.posVisit(currNode);
     }
+
+    @Override
+    public List<NODE> findPath(NODE endNode) {
+        LinkedList<NODE> path = new LinkedList<>();
+
+//        NODE curr = endNode;
+//
+//        while (curr != begNode) {
+//            path.addFirst(curr);
+//
+//            BFSNodeMetadata<NODE> bfsNodeMetadata = getNodeMetadata(curr);
+//
+//            curr = bfsNodeMetadata.getParent();
+//        }
+//
+//        path.addFirst(curr);
+
+        return path;
+    }
+
 }

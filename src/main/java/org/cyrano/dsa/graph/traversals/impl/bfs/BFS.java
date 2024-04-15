@@ -16,30 +16,9 @@ import java.util.Queue;
 
 public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
 
-    @Getter
-    private Map<NODE, BFSNodeMetadata<NODE>> nodeMetadataMap = new HashMap<>();
+    private NodeMetadataMap<NODE> nodeNodeMetadataMap = new NodeMetadataMap<>();
 
     private NODE begNode;
-
-    // --------------------------------------------------------------------------------
-
-    protected BFSNodeMetadata<NODE> lazyGetNodeMetadata(NODE node) {
-        BFSNodeMetadata<NODE> nodeTraversal = nodeMetadataMap.get(node);
-
-        if (nodeTraversal == null) {
-            nodeTraversal = new BFSNodeMetadata<>();
-            nodeMetadataMap.put(node, nodeTraversal);
-        }
-
-        return nodeTraversal;
-    }
-
-    // --------------------------------------------------------------------------------
-
-    @Override
-    public BFSNodeMetadata<NODE> getNodeMetadata(NODE node) {
-        return lazyGetNodeMetadata(node);
-    }
 
     // --------------------------------------------------------------------------------
 
@@ -49,7 +28,7 @@ public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
 
         Queue<NODE> queue = new LinkedList<>();
 
-        doDisc(begNode, null);
+        nodeNodeMetadataMap.doDisc(begNode, null);
         queue.add(begNode);
 
         while (!queue.isEmpty()) {
@@ -57,19 +36,19 @@ public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
 
             visitor.preVisit(curr);
 
-            doProc(curr);
+            nodeNodeMetadataMap.doProc(curr);
 
             Iterator<Edge<NODE>> itt = graph.adjacent(curr, Direction.SOURCE_TO_TARGET);
 
             while (itt.hasNext()) {
                 Edge<NODE> edge = itt.next();
 
-                if (!isDisc(edge.getTarget())) {
-                    doDisc(edge.getTarget(), edge.getSource());
+                if (!nodeNodeMetadataMap.isDisc(edge.getTarget())) {
+                    nodeNodeMetadataMap.doDisc(edge.getTarget(), edge.getSource());
                     queue.add(edge.getTarget());
                 }
 
-                if (!isProc(edge.getTarget())) {
+                if (!nodeNodeMetadataMap.isProc(edge.getTarget())) {
                     visitor.visit(edge);
                 }
             }
@@ -78,38 +57,23 @@ public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
         }
     }
 
-    private void doProc(NODE node) {
-        getNodeMetadata(node).proc();
-    }
-
-    private boolean isProc(NODE node) {
-        return getNodeMetadata(node).isProc();
-    }
-
-    private void doDisc(NODE node, NODE from) {
-        getNodeMetadata(node).disc(from);
-    }
-
-    private boolean isDisc(NODE node) {
-        return getNodeMetadata(node).isDisc();
-    }
 
 
     @Override
     public List<NODE> findPath(NODE endNode) {
         LinkedList<NODE> path = new LinkedList<>();
 
-        NODE curr = endNode;
-
-        while (curr != begNode) {
-            path.addFirst(curr);
-
-            BFSNodeMetadata<NODE> bfsNodeMetadata = getNodeMetadata(curr);
-
-            curr = bfsNodeMetadata.getParent();
-        }
-
-        path.addFirst(curr);
+//        NODE curr = endNode;
+//
+//        while (curr != begNode) {
+//            path.addFirst(curr);
+//
+//            BFSNodeMetadata<NODE> bfsNodeMetadata = getNodeMetadata(curr);
+//
+//            curr = bfsNodeMetadata.getParent();
+//        }
+//
+//        path.addFirst(curr);
 
         return path;
     }

@@ -28,7 +28,7 @@ public abstract class DFSBase<NODE> implements Traversal<NODE, DFSNodeMetadata<N
 
     // --------------------------------------------------------------------------------
 
-    @Override
+    //@Override
     public DFSNodeMetadata<NODE> getNodeMetadata(NODE node) {
         return lazyGetNodeMetadata(node);
     }

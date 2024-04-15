@@ -1,18 +1,27 @@
 package org.cyrano.dsa.graph.traversals.impl.dfs;
 
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.cyrano.dsa.graph.interfaces.Direction;
+import org.cyrano.dsa.graph.traversals.interfaces.Traversal;
 import org.cyrano.dsa.graph.traversals.interfaces.Visitor;
 import org.cyrano.dsa.graph.interfaces.Edge;
 import org.cyrano.dsa.graph.interfaces.Graph;
 
 import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Stack;
 
 @Slf4j
-public class DFSItt<NODE> extends DFSBase<NODE> {
+public class DFSItt<NODE> /*extends DFSBase<NODE>*/ implements Traversal<NODE, DFSNodeMetadata<NODE>> {
+
+    @Getter
+    private NodeMetadataMap<NODE> nodeNodeMetadataMap = new NodeMetadataMap<>();
+
+    protected NODE begNode;
 
     @Override
     public void traverse(Graph<NODE> graph, Visitor<NODE> visitor, NODE begNode) {
@@ -34,7 +43,8 @@ public class DFSItt<NODE> extends DFSBase<NODE> {
             StackStructure<NODE> currentStackStructure = stack.peek();
             Edge<NODE> currentEdge = currentStackStructure.edge;
             NODE currentNode = currentEdge.getTarget();
-            DFSNodeMetadata<NODE> currNodeMetadata = getNodeMetadata(currentNode);
+
+            DFSNodeMetadata<NODE> currNodeMetadata = nodeNodeMetadataMap.getNodeMetadata(currentNode);
 
             if (!currNodeMetadata.isDisc()) {
                 currNodeMetadata.disc(time, currentEdge.getSource());
@@ -77,7 +87,7 @@ public class DFSItt<NODE> extends DFSBase<NODE> {
     public StackStructure<NODE> findNextEdge(Iterator<Edge<NODE>> itt, Visitor<NODE> visitor) {
         while (itt.hasNext()) {
             Edge<NODE> edge = itt.next();
-            DFSNodeMetadata<NODE> nextNodeMetadata = getNodeMetadata(edge.getTarget());
+            DFSNodeMetadata<NODE> nextNodeMetadata = nodeNodeMetadataMap.getNodeMetadata(edge.getTarget());
 
             if (!nextNodeMetadata.isDisc()) {
                 return new StackStructure<>(edge, null);
@@ -94,4 +104,25 @@ public class DFSItt<NODE> extends DFSBase<NODE> {
         Edge<NODE> edge;
         Iterator<Edge<NODE>> itt;
     }
+
+
+    @Override
+    public List<NODE> findPath(NODE endNode) {
+        LinkedList<NODE> path = new LinkedList<>();
+
+//        NODE curr = endNode;
+//
+//        while (curr != begNode) {
+//            path.addFirst(curr);
+//
+//            BFSNodeMetadata<NODE> bfsNodeMetadata = getNodeMetadata(curr);
+//
+//            curr = bfsNodeMetadata.getParent();
+//        }
+//
+//        path.addFirst(curr);
+
+        return path;
+    }
+
 }

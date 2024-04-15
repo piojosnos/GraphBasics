@@ -36,7 +36,7 @@ public class BFSCopy<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
 
     // --------------------------------------------------------------------------------
 
-    @Override
+    //@Override
     public BFSNodeMetadata<NODE> getNodeMetadata(NODE node) {
         return lazyGetNodeMetadata(node);
     }

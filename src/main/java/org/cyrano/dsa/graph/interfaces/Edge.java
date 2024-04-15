@@ -1,30 +1,29 @@
 package org.cyrano.dsa.graph.interfaces;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 @EqualsAndHashCode
 @Getter
-@RequiredArgsConstructor
+@NoArgsConstructor
+@AllArgsConstructor
 public class Edge<NODE> {
 
     @EqualsAndHashCode.Include
-    private final NODE source;
+    private NODE source;
 
     @EqualsAndHashCode.Include
-    private final NODE target;
+    private NODE target;
 
     @EqualsAndHashCode.Exclude
-    private final double weight;
+    private double weight;
 
     // --------------------------------------------------------------------------------
 
-    public String calcForwardEdgeId() {
+    public String toString() {
         return source + "|" + target;
-    }
-
-    public String calcReverseEdgeId() {
-        return target + "|" + source;
     }
 }

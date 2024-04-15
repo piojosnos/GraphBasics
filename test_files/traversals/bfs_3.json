@@ -1,0 +1,172 @@
+{
+  "operationList": [
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 1
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 1,
+        "target": 2,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 1,
+        "target": 3,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 1,
+        "target": 4,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 1
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 2
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 2,
+        "target": 5,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 2
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 3
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 9,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 5,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 3
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 4
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 4,
+        "target": 8,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 4,
+        "target": 9,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 4
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 5
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 5,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 5,
+        "target": 7,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 5
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 9
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 9
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 8
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 8,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 8
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 6
+    },
+    {
+      "operationType": "VISIT_EDGE",
+      "edge": {
+        "source": 6,
+        "target": 7,
+        "weight": 1.0
+      }
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 6
+    },
+    {
+      "operationType": "PRE_VISIT_NODE",
+      "node": 7
+    },
+    {
+      "operationType": "POS_VISIT_NODE",
+      "node": 7
+    }
+  ]
+}

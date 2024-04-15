@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface Traversal<NODE, T> {
 
-    T getNodeMetadata(NODE node);
+    //T getNodeMetadata(NODE node);
 
     void traverse(Graph<NODE> graph, Visitor<NODE> visitor, NODE startNode);
 
