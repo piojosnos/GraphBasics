@@ -12,7 +12,7 @@ import java.util.Map;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class GraphAdjacencyListDirectedDouble<NODE> implements Graph<NODE> {
+public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
 
     private final Map<NODE, Edges<NODE>> edgesByNode = new HashMap<>();
 
