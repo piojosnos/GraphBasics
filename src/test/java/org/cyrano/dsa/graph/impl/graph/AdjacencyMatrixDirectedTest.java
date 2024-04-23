@@ -1,10 +1,10 @@
-package org.cyrano.dsa.graph.impl;
+package org.cyrano.dsa.graph.impl.graph;
 
 import org.cyrano.dsa.graph.impl.adjacencymatrix.GraphAdjacencyMatrix;
-import org.cyrano.dsa.graph.impl.base.GraphBaseTestDirectedDouble;
+import org.cyrano.dsa.graph.impl.base.GraphBaseTestDirected;
 import org.cyrano.dsa.graph.interfaces.Graph;
 
-public class AdjacencyMatrixDirectedDoubleTest extends GraphBaseTestDirectedDouble {
+public class AdjacencyMatrixDirectedTest extends GraphBaseTestDirected {
 
     protected Graph createGraph() {
         return new GraphAdjacencyMatrix(true, 8);

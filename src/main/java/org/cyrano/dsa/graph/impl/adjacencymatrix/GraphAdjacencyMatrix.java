@@ -7,8 +7,6 @@ import org.cyrano.dsa.graph.interfaces.Graph;
 
 import java.util.Iterator;
 
-import static org.cyrano.dsa.graph.impl.Homework.CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK;
-
 public class GraphAdjacencyMatrix implements Graph<Integer> {
 
     private final double[][] adjacencyMatrix;
@@ -43,7 +41,14 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
 
     @Override
     public void deleteNode(Integer node) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        nodeExist(node, true);
+
+        nodes[node] = false;
+
+        for (int i = 0; i < nodes.length; i++) {
+            adjacencyMatrix[node][i] = 0;
+            adjacencyMatrix[i][node] = 0;
+        }
     }
 
     // --------------------------------------------------------------------------------
@@ -67,7 +72,14 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
 
     @Override
     public void deleteEdge(Integer source, Integer target) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        nodeExist(source, true);
+        nodeExist(target, true);
+
+        adjacencyMatrix[source][target] = 0;
+
+        if (!isDirected()) {
+            adjacencyMatrix[target][source] = 0;
+        }
     }
 
     // --------------------------------------------------------------------------------

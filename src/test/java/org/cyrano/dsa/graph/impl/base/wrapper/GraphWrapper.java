@@ -29,6 +29,14 @@ public class GraphWrapper<NODE> {
 
     // --------------------------------------------------------------------------------
 
+    public void deleteNodes(NODE... nodes) {
+        for (NODE node : nodes) {
+            graph.deleteNode(node);
+        }
+    }
+
+    // --------------------------------------------------------------------------------
+
     public void assertNodes(NODE... expNodes) {
         List<NODE> actNodes = nodes();
 
@@ -70,6 +78,14 @@ public class GraphWrapper<NODE> {
     public void insertEdges(NODE source, EdgeSourceOrTarget<NODE>... edgeTargets) {
         for (EdgeSourceOrTarget<NODE> edgeTarget : edgeTargets) {
             graph.insertEdge(source, edgeTarget.node(), edgeTarget.weight());
+        }
+    }
+
+    // --------------------------------------------------------------------------------
+
+    public void deleteEdges(NODE source, NODE... targets) {
+        for (NODE target : targets) {
+            graph.deleteEdge(source, target);
         }
     }
 

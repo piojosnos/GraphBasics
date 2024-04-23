@@ -11,8 +11,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import static org.cyrano.dsa.graph.impl.Homework.CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK;
-
 @RequiredArgsConstructor
 public class GraphAdjacencyListDirectedDouble<NODE> implements Graph<NODE> {
 
@@ -34,7 +32,19 @@ public class GraphAdjacencyListDirectedDouble<NODE> implements Graph<NODE> {
 
     @Override
     public void deleteNode(NODE node) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        Edges<NODE> edges = getAdjacent(node, true);
+
+        for (Edge<NODE> edge : edges.sourceEdges) {
+            Edges<NODE> edgesOtherSide = getAdjacent(edge.getTarget(), true);
+            edgesOtherSide.targetEdges.remove(edge);
+        }
+
+        for (Edge<NODE> edge : edges.targetEdges) {
+            Edges<NODE> edgesOtherSide = getAdjacent(edge.getSource(), true);
+            edgesOtherSide.sourceEdges.remove(edge);
+        }
+
+        edgesByNode.remove(node);
     }
 
     // --------------------------------------------------------------------------------
@@ -61,7 +71,13 @@ public class GraphAdjacencyListDirectedDouble<NODE> implements Graph<NODE> {
 
     @Override
     public void deleteEdge(NODE source, NODE target) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        Edge edge = new Edge<>(source, target, -1);
+
+        Edges<NODE> edgesSource = getAdjacent(source, true);
+        edgesSource.sourceEdges.remove(edge);
+
+        Edges<NODE> edgesTarget = getAdjacent(target, true);
+        edgesTarget.targetEdges.remove(edge);
     }
 
     // --------------------------------------------------------------------------------

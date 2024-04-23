@@ -12,8 +12,6 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
-import static org.cyrano.dsa.graph.impl.Homework.CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK;
-
 @RequiredArgsConstructor
 public class GraphAdjacencyList<NODE> implements Graph<NODE> {
 
@@ -31,7 +29,22 @@ public class GraphAdjacencyList<NODE> implements Graph<NODE> {
 
     @Override
     public void deleteNode(NODE node) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        // TODO: Horrible
+        Set<Edge<NODE>> sourceAdjacent = getAdjacent(node, true);
+
+        for (Edge<NODE> edge : sourceAdjacent) {
+            Set<Edge<NODE>> targetAdjacent = getAdjacent(
+                    edge.getSource() == node ?
+                            edge.getTarget() : edge.getSource(), true);
+
+            if (directed) {
+                targetAdjacent.remove(new Edge<>(edge.getSource(), edge.getTarget(), -1));
+            } else {
+                targetAdjacent.remove(new Edge<>(edge.getTarget(), edge.getSource(), -1));
+            }
+        }
+
+        edgeSetByNode.remove(node);
     }
 
     // --------------------------------------------------------------------------------
@@ -42,15 +55,20 @@ public class GraphAdjacencyList<NODE> implements Graph<NODE> {
             throw new IllegalArgumentException("weight=" + weight);
         }
 
-        Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
-        sourceAdjacent.add(new Edge<>(source, target, weight));
-
+        // TODO: Horrible
         if (directed) {
-            return;
-        }
+            Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+            sourceAdjacent.add(new Edge<>(source, target, weight));
 
-        Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
-        targetAdjacent.add(new Edge<>(target, source, weight));
+            Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+            targetAdjacent.add(new Edge<>(source, target, weight));
+        } else {
+            Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+            sourceAdjacent.add(new Edge<>(source, target, weight));
+
+            Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+            targetAdjacent.add(new Edge<>(target, source, weight));
+        }
     }
 
     @Override
@@ -60,7 +78,20 @@ public class GraphAdjacencyList<NODE> implements Graph<NODE> {
 
     @Override
     public void deleteEdge(NODE source, NODE target) {
-        throw new UnsupportedOperationException(CAN_YOU_IMPLEMENT_THIS_AS_HOMEWORK);
+        // TODO: Horrible
+        if (directed) {
+            Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+            sourceAdjacent.remove(new Edge<>(source, target, -1));
+
+            Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+            targetAdjacent.remove(new Edge<>(source, target, -1));
+        } else {
+            Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+            sourceAdjacent.remove(new Edge<>(source, target, -1));
+
+            Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+            targetAdjacent.remove(new Edge<>(target, source, -1));
+        }
     }
 
     // --------------------------------------------------------------------------------
@@ -72,14 +103,13 @@ public class GraphAdjacencyList<NODE> implements Graph<NODE> {
 
     @Override
     public Iterator<Edge<NODE>> adjacent(NODE node, Direction direction) {
-        switch (direction) {
-            case SOURCE_TO_TARGET:
-                return getAdjacent(node, true).iterator();
-            case TARGET_TO_SOURCE:
-                throw new UnsupportedOperationException();
+        if (directed) {
+            return new GraphAdjacencyListEdgeIterator<>(direction,
+                    node, getAdjacent(node, true).iterator());
+        } else {
+            return new GraphAdjacencyListEdgeIterator<>(Direction.SOURCE_TO_TARGET,
+                    node, getAdjacent(node, true).iterator());
         }
-
-        throw new IllegalArgumentException(direction.toString());
     }
 
     // --------------------------------------------------------------------------------

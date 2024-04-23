@@ -40,6 +40,12 @@ public abstract class GraphBaseTest<NODE> {
 
     // --------------------------------------------------------------------------------
 
+    protected void deleteNodes(NODE... nodes) {
+        wrapper.deleteNodes(nodes);
+    }
+
+    // --------------------------------------------------------------------------------
+
     protected void assertNodes(NODE... expNodes) {
         wrapper.assertNodes(expNodes);
     }
@@ -56,6 +62,12 @@ public abstract class GraphBaseTest<NODE> {
 
     protected void insertEdges(NODE source, EdgeSourceOrTarget<NODE>... edgeTargets) {
         wrapper.insertEdges(source, edgeTargets);
+    }
+
+    // --------------------------------------------------------------------------------
+
+    protected void deleteEdges(NODE source, NODE... targets) {
+        wrapper.deleteEdges(source, targets);
     }
 
     // --------------------------------------------------------------------------------

@@ -3,6 +3,7 @@ package org.cyrano.dsa.graph.impl.base;
 import org.junit.Test;
 
 import static org.cyrano.dsa.graph.interfaces.Direction.SOURCE_TO_TARGET;
+import static org.cyrano.dsa.graph.interfaces.Direction.TARGET_TO_SOURCE;
 
 @SuppressWarnings("unchecked")
 public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
@@ -57,19 +58,24 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
     public void one_node_no_adjacent_0() {
         insertNodes(0);
         assertAdjacent(0, SOURCE_TO_TARGET);
+        assertAdjacent(0, TARGET_TO_SOURCE);
     }
 
     @Test
     public void one_node_no_adjacent_7() {
         insertNodes(7);
         assertAdjacent(7, SOURCE_TO_TARGET);
+        assertAdjacent(7, TARGET_TO_SOURCE);
     }
 
     @Test
     public void two_node_no_adjacent() {
         insertNodes(1, 6);
         assertAdjacent(1, SOURCE_TO_TARGET);
+        assertAdjacent(1, TARGET_TO_SOURCE);
+
         assertAdjacent(6, SOURCE_TO_TARGET);
+        assertAdjacent(6, TARGET_TO_SOURCE);
     }
 
     // --------------------------------------------------------------------------------
@@ -83,8 +89,10 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(0, TARGET_TO_SOURCE);
 
         assertAdjacent(1, SOURCE_TO_TARGET);
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0));
     }
 
     // 0 <-> 1
@@ -97,15 +105,17 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(0, TARGET_TO_SOURCE, edge(1));
 
         assertAdjacent(1, SOURCE_TO_TARGET, edge(0));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0));
     }
 
     // --------------------------------------------------------------------------------
 
-    //    /> 1
-    // 0 --> 2
-    //    \> 3
+    //    /- 1
+    // 0 --- 2
+    //    \- 3
     @Test
     public void adds_a_node_with_three_other_nodes_and_edges() {
         insertNodes(0, 1, 2, 3);
@@ -114,10 +124,16 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE);
 
         assertAdjacent(1, SOURCE_TO_TARGET);
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0));
+
         assertAdjacent(2, SOURCE_TO_TARGET);
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(0));
+
         assertAdjacent(3, SOURCE_TO_TARGET);
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0));
     }
 
     //    /> 1
@@ -135,10 +151,16 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE, edge(1), edge(2), edge(3));
 
         assertAdjacent(1, SOURCE_TO_TARGET, edge(0));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0));
+
         assertAdjacent(2, SOURCE_TO_TARGET, edge(0));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(0));
+
         assertAdjacent(3, SOURCE_TO_TARGET, edge(0));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0));
     }
 
     // --------------------------------------------------------------------------------
@@ -157,9 +179,16 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE);
+
         assertAdjacent(1, SOURCE_TO_TARGET, edge(2), edge(3));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0));
+
         assertAdjacent(2, SOURCE_TO_TARGET, edge(3));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(0), edge(1));
+
         assertAdjacent(3, SOURCE_TO_TARGET);
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0), edge(1), edge(2));
     }
 
     // 0-1
@@ -177,9 +206,16 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE, edge(1), edge(2), edge(3));
+
         assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0), edge(2), edge(3));
+
         assertAdjacent(2, SOURCE_TO_TARGET, edge(0), edge(1), edge(3));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(0), edge(1), edge(3));
+
         assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(2));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0), edge(1), edge(2));
     }
 
     // --------------------------------------------------------------------------------
@@ -204,16 +240,28 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3, 4, 5, 6, 7);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE);
+
         assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(2, TARGET_TO_SOURCE);
+
         assertAdjacent(5, SOURCE_TO_TARGET, edge(3), edge(6));
+        assertAdjacent(5, TARGET_TO_SOURCE);
+
         assertAdjacent(7, SOURCE_TO_TARGET, edge(4), edge(6));
+        assertAdjacent(7, TARGET_TO_SOURCE);
 
         assertAdjacent(1, SOURCE_TO_TARGET, edge(3), edge(4));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0), edge(2));
 
         assertAdjacent(3, SOURCE_TO_TARGET);
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0), edge(1), edge(5), edge(6));
+
         assertAdjacent(4, SOURCE_TO_TARGET);
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(1), edge(2), edge(6), edge(7));
 
         assertAdjacent(6, SOURCE_TO_TARGET, edge(3), edge(4));
+        assertAdjacent(6, TARGET_TO_SOURCE, edge(5), edge(7));
     }
 
     // 0-1-2
@@ -240,15 +288,150 @@ public abstract class GraphBaseTestDirected extends GraphBaseTest<Integer> {
         assertNodes(0, 1, 2, 3, 4, 5, 6, 7);
 
         assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(3));
+        assertAdjacent(0, TARGET_TO_SOURCE, edge(1), edge(3));
+
         assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(1), edge(4));
+
         assertAdjacent(5, SOURCE_TO_TARGET, edge(3), edge(6));
+        assertAdjacent(5, TARGET_TO_SOURCE, edge(3), edge(6));
+
         assertAdjacent(7, SOURCE_TO_TARGET, edge(4), edge(6));
+        assertAdjacent(7, TARGET_TO_SOURCE, edge(4), edge(6));
 
         assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3), edge(4));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(0), edge(2), edge(3), edge(4));
 
         assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(5), edge(6));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0), edge(1), edge(5), edge(6));
+
         assertAdjacent(4, SOURCE_TO_TARGET, edge(1), edge(2), edge(6), edge(7));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(1), edge(2), edge(6), edge(7));
 
         assertAdjacent(6, SOURCE_TO_TARGET, edge(3), edge(4), edge(5), edge(7));
+        assertAdjacent(6, TARGET_TO_SOURCE, edge(3), edge(4), edge(5), edge(7));
+    }
+
+    // --------------------------------------------------------------------------------
+
+    // 1 - 3
+    // |   |
+    // 2 - 4
+    @Test(expected = IllegalArgumentException.class)
+    public void fails_when_deletes_node_that_doesnt_exist() {
+        insertNodes(1, 2, 3, 4);
+
+        insertEdges(1, edge(3));
+        insertEdges(3, edge(4));
+        insertEdges(4, edge(2));
+        insertEdges(2, edge(1));
+
+        assertNodes(1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(3));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(1));
+
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(4));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(3));
+
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(4));
+
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(2));
+
+        deleteNodes(0);
+    }
+
+    // 1 -\-/- 3
+    // |   0   |
+    // 2 -/-\- 4
+    @Test
+    public void deletes_center_node() {
+        insertNodes(0, 1, 2, 3, 4);
+
+        insertEdges(1, edge(0), edge(3));
+        insertEdges(2, edge(0), edge(1));
+
+        insertEdges(3, edge(4));
+        insertEdges(4, edge(2));
+
+        insertEdges(0, edge(3));
+        insertEdges(0, edge(4));
+
+        assertNodes(0, 1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(3));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(2));
+
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(0), edge(1));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(4));
+
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(4));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(0), edge(1));
+
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(0), edge(3));
+
+        assertAdjacent(0, SOURCE_TO_TARGET, edge(3), edge(4));
+        assertAdjacent(0, TARGET_TO_SOURCE, edge(1), edge(2));
+
+        deleteNodes(0);
+
+        assertNodes(1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(3));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(2));
+
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(4));
+
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(4));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(1));
+
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(3));
+    }
+
+    // 1 - 3
+    // |   |
+    // 2 - 4
+    @Test
+    public void deletes_edge() {
+        insertNodes(1, 2, 3, 4);
+
+        insertEdges(1, edge(3));
+        insertEdges(3, edge(4));
+        insertEdges(4, edge(2));
+        insertEdges(2, edge(1));
+
+        assertNodes(1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(3));
+        assertAdjacent(3, TARGET_TO_SOURCE, edge(1));
+
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(4));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(3));
+
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2));
+        assertAdjacent(2, TARGET_TO_SOURCE, edge(4));
+
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(2));
+
+        deleteEdges(1, 3);
+        deleteEdges(4, 2);
+
+        assertAdjacent(1, SOURCE_TO_TARGET);
+        assertAdjacent(3, TARGET_TO_SOURCE);
+
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(4));
+        assertAdjacent(4, TARGET_TO_SOURCE, edge(3));
+
+        assertAdjacent(4, SOURCE_TO_TARGET);
+        assertAdjacent(2, TARGET_TO_SOURCE);
+
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1));
+        assertAdjacent(1, TARGET_TO_SOURCE, edge(2));
     }
 }

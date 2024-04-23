@@ -160,4 +160,63 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertAdjacent(6, SOURCE_TO_TARGET, edge(3), edge(4), edge(5), edge(7));
     }
+
+    // --------------------------------------------------------------------------------
+
+    // 1 - 3
+    // |   |
+    // 2 - 4
+    @Test(expected = IllegalArgumentException.class)
+    public void fails_when_deletes_node_that_doesnt_exist() {
+        insertNodes(1, 2, 3, 4);
+
+        insertEdges(1, edge(3));
+        insertEdges(3, edge(4));
+        insertEdges(4, edge(2));
+        insertEdges(2, edge(1));
+
+        assertNodes(1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(2), edge(3));
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2), edge(3));
+
+        deleteNodes(0);
+    }
+
+    // 1 -\-/- 3
+    // |   0   |
+    // 2 -/-\- 4
+    @Test
+    public void deletes_center_node() {
+        insertNodes(0, 1, 2, 3, 4);
+
+        insertEdges(1, edge(0), edge(3));
+        insertEdges(2, edge(0), edge(1));
+
+        insertEdges(3, edge(4));
+        insertEdges(4, edge(2));
+
+        insertEdges(0, edge(3));
+        insertEdges(0, edge(4));
+
+        assertNodes(0, 1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(0), edge(1), edge(4));
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(4));
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
+
+        assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3), edge(4));
+
+        deleteNodes(0);
+
+        assertNodes(1, 2, 3, 4);
+
+        assertAdjacent(1, SOURCE_TO_TARGET, edge(2), edge(3));
+        assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(3, SOURCE_TO_TARGET, edge(1), edge(4));
+        assertAdjacent(4, SOURCE_TO_TARGET, edge(2), edge(3));
+    }
 }

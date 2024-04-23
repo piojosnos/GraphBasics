@@ -1,4 +1,4 @@
-package org.cyrano.dsa.graph.impl;
+package org.cyrano.dsa.graph.impl.graph;
 
 import org.cyrano.dsa.graph.impl.adjacencylist.GraphAdjacencyList;
 import org.cyrano.dsa.graph.impl.base.GraphBaseTestDirected;
