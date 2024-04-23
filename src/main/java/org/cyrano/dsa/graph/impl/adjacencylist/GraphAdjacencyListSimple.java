@@ -13,19 +13,12 @@ import java.util.Map;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
+public class GraphAdjacencyListSimple<NODE> implements Graph<NODE> {
 
-    private final Map<NODE, Edges<NODE>> edgesByNode = new HashMap<>();
+    private final Map<NODE, Set<Edge<NODE>>> edgeSetByNode = new HashMap<>();
 
     @Getter
     private final boolean directed;
-
-    // --------------------------------------------------------------------------------
-
-    private static class Edges<NODE> {
-        Set<Edge<NODE>> sourceEdges = new HashSet<>();
-        Set<Edge<NODE>> targetEdges = new HashSet<>();
-    }
 
     // --------------------------------------------------------------------------------
     // NODES
@@ -33,24 +26,28 @@ public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
 
     @Override
     public void insertNode(NODE node) {
-        edgesByNode.put(node, new Edges<>());
+        edgeSetByNode.put(node, new HashSet<>());
     }
 
     @Override
     public void deleteNode(NODE node) {
-        Edges<NODE> edges = getAdjacent(node, true);
+        Set<Edge<NODE>> sourceAdjacent = getAdjacent(node, true);
 
-        for (Edge<NODE> edge : edges.sourceEdges) {
-            Edges<NODE> edgesOtherSide = getAdjacent(edge.getTarget(), true);
-            edgesOtherSide.targetEdges.remove(edge);
+        for (Edge<NODE> edge : sourceAdjacent) {
+            if (edge.getSource() == node) { // node IS SOURCE, remove from TARGET
+                Set<Edge<NODE>> adjacent = getAdjacent(edge.getTarget(), true);
+                adjacent.remove(edge);
+            }
+
+            if (edge.getTarget() == node) { // node IS TARGET, remove from SOURCE
+                Set<Edge<NODE>> adjacent = getAdjacent(edge.getSource(), true);
+                adjacent.remove(edge);
+            }
         }
 
-        for (Edge<NODE> edge : edges.targetEdges) {
-            Edges<NODE> edgesOtherSide = getAdjacent(edge.getSource(), true);
-            edgesOtherSide.sourceEdges.remove(edge);
-        }
+        sourceAdjacent.clear();
 
-        edgesByNode.remove(node);
+        edgeSetByNode.remove(node);
     }
 
     // --------------------------------------------------------------------------------
@@ -76,13 +73,11 @@ public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
             throw new IllegalArgumentException("weight=" + weight);
         }
 
-        Edge<NODE> edge = new Edge<>(source, target, weight);
+        Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+        sourceAdjacent.add(new Edge<>(source, target, weight));
 
-        Edges<NODE> sourceAdjacent = getAdjacent(source, true);
-        sourceAdjacent.sourceEdges.add(edge); // --->
-
-        Edges<NODE> targetAdjacent = getAdjacent(target, true);
-        targetAdjacent.targetEdges.add(edge); // <---
+        Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+        targetAdjacent.add(new Edge<>(source, target, weight));
     }
 
     // --------------------------------------------------------------------------------
@@ -97,13 +92,11 @@ public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
     }
 
     private void deleteEdgeDirected(NODE source, NODE target) {
-        Edge edge = new Edge<>(source, target, -1);
+        Set<Edge<NODE>> sourceAdjacent = getAdjacent(source, true);
+        sourceAdjacent.remove(new Edge<>(source, target, -1));
 
-        Edges<NODE> edgesSource = getAdjacent(source, true);
-        edgesSource.sourceEdges.remove(edge);
-
-        Edges<NODE> edgesTarget = getAdjacent(target, true);
-        edgesTarget.targetEdges.remove(edge);
+        Set<Edge<NODE>> targetAdjacent = getAdjacent(target, true);
+        targetAdjacent.remove(new Edge<>(source, target, -1));
     }
 
     // --------------------------------------------------------------------------------
@@ -112,32 +105,26 @@ public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
 
     @Override
     public Iterator<NODE> nodes() {
-        return edgesByNode.keySet().iterator();
+        return edgeSetByNode.keySet().iterator();
     }
 
     @Override
     public Iterator<Edge<NODE>> adjacent(NODE node, Direction direction) {
-        switch (direction) {
-            case SOURCE_TO_TARGET:
-                return getAdjacent(node, true).sourceEdges.iterator();
-            case TARGET_TO_SOURCE:
-                return getAdjacent(node, true).targetEdges.iterator();
-        }
-
-        throw new IllegalArgumentException(direction.toString());
+        return new GraphAdjacencyListSimpleEdgeIterator<>(direction,
+                node, getAdjacent(node, true).iterator());
     }
 
     // --------------------------------------------------------------------------------
     // MISC
     // --------------------------------------------------------------------------------
 
-    private Edges<NODE> getAdjacent(NODE node, boolean throwExceptionIfNot) {
-        Edges<NODE> nodeEdges = edgesByNode.get(node);
+    private Set<Edge<NODE>> getAdjacent(NODE node, boolean throwExceptionIfNot) {
+        Set<Edge<NODE>> nodeAdjacent = edgeSetByNode.get(node);
 
-        if (throwExceptionIfNot && nodeEdges == null) {
+        if (throwExceptionIfNot && nodeAdjacent == null) {
             throw new IllegalArgumentException("node=" + node + ", not found");
         }
 
-        return nodeEdges;
+        return nodeAdjacent;
     }
 }

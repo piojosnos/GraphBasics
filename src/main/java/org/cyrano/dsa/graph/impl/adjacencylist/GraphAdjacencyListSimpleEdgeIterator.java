@@ -6,7 +6,7 @@ import org.cyrano.dsa.graph.interfaces.Edge;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-public class SimpleGraphAdjacencyListEdgeIterator<NODE> implements Iterator<Edge<NODE>> {
+public class GraphAdjacencyListSimpleEdgeIterator<NODE> implements Iterator<Edge<NODE>> {
 
     private final Direction direction;
 
@@ -18,7 +18,7 @@ public class SimpleGraphAdjacencyListEdgeIterator<NODE> implements Iterator<Edge
 
     // --------------------------------------------------------------------------------
 
-    public SimpleGraphAdjacencyListEdgeIterator(Direction direction, NODE node, Iterator<Edge<NODE>> itt) {
+    public GraphAdjacencyListSimpleEdgeIterator(Direction direction, NODE node, Iterator<Edge<NODE>> itt) {
         this.direction = direction;
         this.node = node;
         this.itt = itt;

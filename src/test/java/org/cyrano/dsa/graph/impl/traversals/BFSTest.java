@@ -1,6 +1,6 @@
 package org.cyrano.dsa.graph.impl.traversals;
 
-import org.cyrano.dsa.graph.impl.adjacencylist.SimpleGraphAdjacencyList;
+import org.cyrano.dsa.graph.impl.adjacencylist.GraphAdjacencyListSimple;
 import org.cyrano.dsa.graph.impl.base.GraphBaseTest;
 import org.cyrano.dsa.graph.impl.traversals.serializable.TraceVisitor;
 import org.cyrano.dsa.graph.interfaces.Graph;
@@ -11,7 +11,7 @@ public class BFSTest extends GraphBaseTest<Integer> {
 
     @Override
     protected Graph<Integer> createGraph() {
-        return new SimpleGraphAdjacencyList(false);
+        return new GraphAdjacencyListSimple(false);
     }
 
     // 0-1-2

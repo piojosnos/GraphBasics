@@ -1,6 +1,6 @@
 package org.cyrano.dsa.graph.impl.traversals;
 
-import org.cyrano.dsa.graph.impl.adjacencylist.SimpleGraphAdjacencyList;
+import org.cyrano.dsa.graph.impl.adjacencylist.GraphAdjacencyListSimple;
 import org.cyrano.dsa.graph.impl.base.GraphBaseTest;
 import org.cyrano.dsa.graph.impl.traversals.serializable.GraphSerializer;
 import org.cyrano.dsa.graph.impl.traversals.serializable.TraceVisitor;
@@ -12,7 +12,7 @@ public class SerStrTest2 extends GraphBaseTest<String> {
 
     @Override
     protected Graph<String> createGraph() {
-        return new SimpleGraphAdjacencyList(false);
+        return new GraphAdjacencyListSimple(false);
     }
 
 
@@ -41,7 +41,7 @@ public class SerStrTest2 extends GraphBaseTest<String> {
         GraphSerializer<String> graphSerializer = new GraphSerializer<>();
         graphSerializer.save("test_files/traversals/dfs_2a_graph.json", getGraph());
 
-        Graph<String> graph2 = new SimpleGraphAdjacencyList(false);
+        Graph<String> graph2 = new GraphAdjacencyListSimple(false);
         graphSerializer.load("test_files/traversals/dfs_2a_graph.json", graph2) ;
         graphSerializer.save("test_files/traversals/dfs_2b_graph.json", graph2);
 
