@@ -76,4 +76,11 @@ public abstract class GraphBaseTest<NODE> {
 
         wrapper.assertAdjacent(node, direction, expEdges);
     }
+
+    protected void assertAdjacentUndirected(
+            NODE node, EdgeSourceOrTarget<NODE>... expEdges) {
+
+        wrapper.assertAdjacent(node, Direction.SOURCE_TO_TARGET, expEdges);
+        wrapper.assertAdjacent(node, Direction.TARGET_TO_SOURCE, expEdges);
+    }
 }

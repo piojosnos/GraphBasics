@@ -2,8 +2,6 @@ package org.cyrano.dsa.graph.impl.base;
 
 import org.junit.Test;
 
-import static org.cyrano.dsa.graph.interfaces.Direction.SOURCE_TO_TARGET;
-
 @SuppressWarnings("unchecked")
 public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
@@ -56,20 +54,20 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
     @Test
     public void one_node_no_adjacent_0() {
         insertNodes(0);
-        assertAdjacent(0, SOURCE_TO_TARGET);
+        assertAdjacentUndirected(0);
     }
 
     @Test
     public void one_node_no_adjacent_7() {
         insertNodes(7);
-        assertAdjacent(7, SOURCE_TO_TARGET);
+        assertAdjacentUndirected(7);
     }
 
     @Test
     public void two_node_no_adjacent() {
         insertNodes(1, 6);
-        assertAdjacent(1, SOURCE_TO_TARGET);
-        assertAdjacent(6, SOURCE_TO_TARGET);
+        assertAdjacentUndirected(1);
+        assertAdjacentUndirected(6);
     }
 
     // --------------------------------------------------------------------------------
@@ -82,9 +80,9 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(0, 1);
 
-        assertAdjacent(0, SOURCE_TO_TARGET, edge(1));
+        assertAdjacentUndirected(0, edge(1));
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(0));
+        assertAdjacentUndirected(1, edge(0));
     }
 
     // --------------------------------------------------------------------------------
@@ -99,11 +97,11 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(0, 1, 2, 3);
 
-        assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
+        assertAdjacentUndirected(0, edge(1), edge(2), edge(3));
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(0));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(0));
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(0));
+        assertAdjacentUndirected(1, edge(0));
+        assertAdjacentUndirected(2, edge(0));
+        assertAdjacentUndirected(3, edge(0));
     }
 
     // --------------------------------------------------------------------------------
@@ -121,10 +119,10 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(0, 1, 2, 3);
 
-        assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3));
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(0), edge(1), edge(3));
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(2));
+        assertAdjacentUndirected(0, edge(1), edge(2), edge(3));
+        assertAdjacentUndirected(1, edge(0), edge(2), edge(3));
+        assertAdjacentUndirected(2, edge(0), edge(1), edge(3));
+        assertAdjacentUndirected(3, edge(0), edge(1), edge(2));
     }
 
     // --------------------------------------------------------------------------------
@@ -148,17 +146,17 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(0, 1, 2, 3, 4, 5, 6, 7);
 
-        assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(3));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
-        assertAdjacent(5, SOURCE_TO_TARGET, edge(3), edge(6));
-        assertAdjacent(7, SOURCE_TO_TARGET, edge(4), edge(6));
+        assertAdjacentUndirected(0, edge(1), edge(3));
+        assertAdjacentUndirected(2, edge(1), edge(4));
+        assertAdjacentUndirected(5, edge(3), edge(6));
+        assertAdjacentUndirected(7, edge(4), edge(6));
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3), edge(4));
+        assertAdjacentUndirected(1, edge(0), edge(2), edge(3), edge(4));
 
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(5), edge(6));
-        assertAdjacent(4, SOURCE_TO_TARGET, edge(1), edge(2), edge(6), edge(7));
+        assertAdjacentUndirected(3, edge(0), edge(1), edge(5), edge(6));
+        assertAdjacentUndirected(4, edge(1), edge(2), edge(6), edge(7));
 
-        assertAdjacent(6, SOURCE_TO_TARGET, edge(3), edge(4), edge(5), edge(7));
+        assertAdjacentUndirected(6, edge(3), edge(4), edge(5), edge(7));
     }
 
     // --------------------------------------------------------------------------------
@@ -177,10 +175,10 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(1, 2, 3, 4);
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(2), edge(3));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(1), edge(4));
-        assertAdjacent(4, SOURCE_TO_TARGET, edge(2), edge(3));
+        assertAdjacentUndirected(1, edge(2), edge(3));
+        assertAdjacentUndirected(2, edge(1), edge(4));
+        assertAdjacentUndirected(3, edge(1), edge(4));
+        assertAdjacentUndirected(4, edge(2), edge(3));
 
         deleteNodes(0);
     }
@@ -203,20 +201,20 @@ public abstract class GraphBaseTestUndirected extends GraphBaseTest<Integer> {
 
         assertNodes(0, 1, 2, 3, 4);
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(0), edge(1), edge(4));
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(0), edge(1), edge(4));
-        assertAdjacent(4, SOURCE_TO_TARGET, edge(0), edge(2), edge(3));
+        assertAdjacentUndirected(1, edge(0), edge(2), edge(3));
+        assertAdjacentUndirected(2, edge(0), edge(1), edge(4));
+        assertAdjacentUndirected(3, edge(0), edge(1), edge(4));
+        assertAdjacentUndirected(4, edge(0), edge(2), edge(3));
 
-        assertAdjacent(0, SOURCE_TO_TARGET, edge(1), edge(2), edge(3), edge(4));
+        assertAdjacentUndirected(0, edge(1), edge(2), edge(3), edge(4));
 
         deleteNodes(0);
 
         assertNodes(1, 2, 3, 4);
 
-        assertAdjacent(1, SOURCE_TO_TARGET, edge(2), edge(3));
-        assertAdjacent(2, SOURCE_TO_TARGET, edge(1), edge(4));
-        assertAdjacent(3, SOURCE_TO_TARGET, edge(1), edge(4));
-        assertAdjacent(4, SOURCE_TO_TARGET, edge(2), edge(3));
+        assertAdjacentUndirected(1, edge(2), edge(3));
+        assertAdjacentUndirected(2, edge(1), edge(4));
+        assertAdjacentUndirected(3, edge(1), edge(4));
+        assertAdjacentUndirected(4, edge(2), edge(3));
     }
 }
