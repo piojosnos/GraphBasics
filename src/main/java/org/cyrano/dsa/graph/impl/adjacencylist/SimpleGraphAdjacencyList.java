@@ -21,6 +21,8 @@ public class SimpleGraphAdjacencyList<NODE> implements Graph<NODE> {
     private final boolean directed;
 
     // --------------------------------------------------------------------------------
+    // NODES
+    // --------------------------------------------------------------------------------
 
     @Override
     public void insertNode(NODE node) {
@@ -48,6 +50,8 @@ public class SimpleGraphAdjacencyList<NODE> implements Graph<NODE> {
         edgeSetByNode.remove(node);
     }
 
+    // --------------------------------------------------------------------------------
+    // EDGES
     // --------------------------------------------------------------------------------
 
     @Override
@@ -96,6 +100,8 @@ public class SimpleGraphAdjacencyList<NODE> implements Graph<NODE> {
     }
 
     // --------------------------------------------------------------------------------
+    // ITERATOR
+    // --------------------------------------------------------------------------------
 
     @Override
     public Iterator<NODE> nodes() {
@@ -108,6 +114,8 @@ public class SimpleGraphAdjacencyList<NODE> implements Graph<NODE> {
                 node, getAdjacent(node, true).iterator());
     }
 
+    // --------------------------------------------------------------------------------
+    // MISC
     // --------------------------------------------------------------------------------
 
     private Set<Edge<NODE>> getAdjacent(NODE node, boolean throwExceptionIfNot) {

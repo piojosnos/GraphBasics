@@ -1,5 +1,6 @@
 package org.cyrano.dsa.graph.impl.adjacencylist;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.cyrano.dsa.graph.interfaces.Direction;
 import org.cyrano.dsa.graph.interfaces.Edge;
@@ -12,9 +13,12 @@ import java.util.Map;
 import java.util.Set;
 
 @RequiredArgsConstructor
-public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
+public class DoubleGraphAdjacencyList<NODE> implements Graph<NODE> {
 
     private final Map<NODE, Edges<NODE>> edgesByNode = new HashMap<>();
+
+    @Getter
+    private final boolean directed;
 
     // --------------------------------------------------------------------------------
 
@@ -23,6 +27,8 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
         Set<Edge<NODE>> targetEdges = new HashSet<>();
     }
 
+    // --------------------------------------------------------------------------------
+    // NODES
     // --------------------------------------------------------------------------------
 
     @Override
@@ -48,9 +54,24 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
     }
 
     // --------------------------------------------------------------------------------
+    // EDGES
+    // --------------------------------------------------------------------------------
 
     @Override
     public void insertEdge(NODE source, NODE target, double weight) {
+        insertEdgeDirected(source, target, weight);
+
+        if (!directed) {
+            insertEdgeDirected(target, source, weight);
+        }
+    }
+
+    @Override
+    public void insertEdge(NODE source, NODE target) {
+        insertEdge(source, target, DEFAULT_WEIGHT);
+    }
+
+    private void insertEdgeDirected(NODE source, NODE target, double weight) {
         if (weight <= 0) {
             throw new IllegalArgumentException("weight=" + weight);
         }
@@ -64,13 +85,18 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
         targetAdjacent.targetEdges.add(edge); // <---
     }
 
-    @Override
-    public void insertEdge(NODE source, NODE target) {
-        insertEdge(source, target, DEFAULT_WEIGHT);
-    }
+    // --------------------------------------------------------------------------------
 
     @Override
     public void deleteEdge(NODE source, NODE target) {
+        deleteEdgeDirected(source, target);
+
+        if (!directed) {
+            deleteEdgeDirected(target, source);
+        }
+    }
+
+    private void deleteEdgeDirected(NODE source, NODE target) {
         Edge edge = new Edge<>(source, target, -1);
 
         Edges<NODE> edgesSource = getAdjacent(source, true);
@@ -80,6 +106,8 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
         edgesTarget.targetEdges.remove(edge);
     }
 
+    // --------------------------------------------------------------------------------
+    // ITERATOR
     // --------------------------------------------------------------------------------
 
     @Override
@@ -100,6 +128,8 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
     }
 
     // --------------------------------------------------------------------------------
+    // MISC
+    // --------------------------------------------------------------------------------
 
     private Edges<NODE> getAdjacent(NODE node, boolean throwExceptionIfNot) {
         Edges<NODE> nodeEdges = edgesByNode.get(node);
@@ -109,12 +139,5 @@ public class DoubleGraphAdjacencyListDirected<NODE> implements Graph<NODE> {
         }
 
         return nodeEdges;
-    }
-
-    // --------------------------------------------------------------------------------
-
-    @Override
-    public boolean isDirected() {
-        return true;
     }
 }

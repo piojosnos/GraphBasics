@@ -31,6 +31,8 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
     }
 
     // --------------------------------------------------------------------------------
+    // NODES
+    // --------------------------------------------------------------------------------
 
     @Override
     public void insertNode(Integer node) {
@@ -52,6 +54,8 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
     }
 
     // --------------------------------------------------------------------------------
+    // EDGES
+    // --------------------------------------------------------------------------------
 
     @Override
     public void insertEdge(Integer source, Integer target, double weight) {
@@ -70,6 +74,8 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
         insertEdge(source, target, DEFAULT_WEIGHT);
     }
 
+    // --------------------------------------------------------------------------------
+
     @Override
     public void deleteEdge(Integer source, Integer target) {
         nodeExist(source, true);
@@ -82,6 +88,8 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
         }
     }
 
+    // --------------------------------------------------------------------------------
+    // ITERATOR
     // --------------------------------------------------------------------------------
 
     @Override
@@ -101,6 +109,8 @@ public class GraphAdjacencyMatrix implements Graph<Integer> {
         throw new IllegalArgumentException(direction.toString());
     }
 
+    // --------------------------------------------------------------------------------
+    // MISC
     // --------------------------------------------------------------------------------
 
     private boolean nodeExist(Integer node, boolean throwExceptionIfNot) {
