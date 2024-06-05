@@ -13,6 +13,8 @@ public class Main2 {
 
         Graph<Integer> graph =
                 new GraphAdjacencyListDouble<>(true);
+//        Graph<Integer> graph =
+//                new GraphAdjacencyMatrix(true, 9);
 
         graph.insertNode(0);
         graph.insertNode(1);
@@ -43,7 +45,7 @@ public class Main2 {
         graph.insertNode(7);
 
         graph.insertEdge(2, 8);
-        graph.insertEdge(4, 8);
+        graph.insertEdge(8, 4);
 
         graph.insertEdge(2, 7);
         graph.insertEdge(7, 4);
@@ -63,7 +65,7 @@ public class Main2 {
 
         // ----------------------------------------
 
-        graph.deleteNode(2);
+        graph.deleteEdge(1, 5);
 
         // ----------------------------------------
 
@@ -72,7 +74,7 @@ public class Main2 {
 
         // ----------------------------------------
 
-        graph.deleteEdge(1, 5);
+        graph.deleteNode(2);
 
         // ----------------------------------------
 

@@ -13,6 +13,8 @@ public class Main1 {
 
         Graph<Integer> graph =
                 new GraphAdjacencyListDouble<>(false);
+//        Graph<Integer> graph =
+//                new GraphAdjacencyMatrix(false, 9);
 
         graph.insertNode(0);
         graph.insertNode(1);
