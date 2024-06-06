@@ -7,8 +7,7 @@
 
     <groupId>org.cyrano</groupId>
     <artifactId>GraphBasics</artifactId>
-    <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
 
     <url>https://github.com/piojosnos/GraphBasics/blob/main/README.md</url>
 
