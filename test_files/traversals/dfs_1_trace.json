@@ -1,184 +1,220 @@
 {
-  "traceList" : [ {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 0
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 0,
-      "target" : 1,
-      "weight" : 1.0
+  "traceList": [
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 0
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 0,
+        "target": 1,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 1
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 1,
+        "target": 0,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 1,
+        "target": 2,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 2
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 2,
+        "target": 1,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 2,
+        "target": 4,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 4
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 4,
+        "target": 1,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 4,
+        "target": 2,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 4,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 6
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 6,
+        "target": 5,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 5
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 5,
+        "target": 3,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 3
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 0,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 1,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 3,
+        "target": 5,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 3
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 5,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 5
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 6,
+        "target": 7,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "PRE_VISIT_NODE",
+      "node": 7
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 7,
+        "target": 4,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 7,
+        "target": 6,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 7
+    },
+    {
+      "traceType": "VISIT_EDGE",
+      "edge": {
+        "source": 6,
+        "target": 4,
+        "weight": 1.0
+      }
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 6
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 4
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 2
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 1
+    },
+    {
+      "traceType": "POS_VISIT_NODE",
+      "node": 0
     }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 1
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 1,
-      "target" : 0,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 1,
-      "target" : 2,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 2
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 2,
-      "target" : 1,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 2,
-      "target" : 4,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 4
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 4,
-      "target" : 1,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 4,
-      "target" : 2,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 4,
-      "target" : 6,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 6
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 6,
-      "target" : 5,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 5
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 5,
-      "target" : 3,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 3
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 3,
-      "target" : 6,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 3,
-      "target" : 0,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 3,
-      "target" : 1,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 3,
-      "target" : 5,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 3
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 5,
-      "target" : 6,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 5
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 6,
-      "target" : 7,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "PRE_VISIT_NODE",
-    "node" : 7
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 7,
-      "target" : 4,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 7,
-      "target" : 6,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 7
-  }, {
-    "traceType" : "VISIT_EDGE",
-    "edge" : {
-      "source" : 6,
-      "target" : 4,
-      "weight" : 1.0
-    }
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 6
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 4
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 2
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 1
-  }, {
-    "traceType" : "POS_VISIT_NODE",
-    "node" : 0
-  } ]
+  ]
 }

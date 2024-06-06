@@ -42,7 +42,7 @@ public class SerStrTest2 extends GraphBaseTest<String> {
         graphSerializer.save("test_files/traversals/dfs_2a_graph.json", getGraph());
 
         Graph<String> graph2 = new GraphAdjacencyListSimple(false);
-        graphSerializer.load("test_files/traversals/dfs_2a_graph.json", graph2) ;
+        graphSerializer.load("test_files/traversals/dfs_2a_graph.json", graph2);
         graphSerializer.save("test_files/traversals/dfs_2b_graph.json", graph2);
 
         //traceVisitor.createOperationList("test_files/traversals/bfs_1.json");

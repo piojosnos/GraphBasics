@@ -1,9 +1,7 @@
 package org.cyrano.dsa.graph.traversals.impl.dfs;
 
-import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.mutable.MutableInt;
 
 @Getter

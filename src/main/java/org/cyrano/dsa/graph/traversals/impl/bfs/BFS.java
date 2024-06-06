@@ -1,17 +1,14 @@
 package org.cyrano.dsa.graph.traversals.impl.bfs;
 
-import lombok.Getter;
 import org.cyrano.dsa.graph.interfaces.Direction;
 import org.cyrano.dsa.graph.interfaces.Edge;
 import org.cyrano.dsa.graph.interfaces.Graph;
 import org.cyrano.dsa.graph.traversals.interfaces.Traversal;
 import org.cyrano.dsa.graph.traversals.interfaces.Visitor;
 
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Queue;
 
 public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
@@ -56,7 +53,6 @@ public class BFS<NODE> implements Traversal<NODE, BFSNodeMetadata<NODE>> {
             visitor.posVisit(curr);
         }
     }
-
 
 
     @Override

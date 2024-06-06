@@ -7,5 +7,4 @@ public class HanoiNode {
     int[] disk = new int[NUMBER_OF_DISKS];
 
 
-
 }

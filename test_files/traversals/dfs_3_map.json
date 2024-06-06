@@ -1,81 +1,91 @@
-[ {
-  "node" : 1,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "begTime" : 1,
-    "endTime" : 18
+[
+  {
+    "node": 1,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "begTime": 1,
+      "endTime": 18
+    }
+  },
+  {
+    "node": 2,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 1,
+      "begTime": 2,
+      "endTime": 17
+    }
+  },
+  {
+    "node": 5,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 2,
+      "begTime": 3,
+      "endTime": 16
+    }
+  },
+  {
+    "node": 3,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 5,
+      "begTime": 4,
+      "endTime": 15
+    }
+  },
+  {
+    "node": 9,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 3,
+      "begTime": 5,
+      "endTime": 14
+    }
+  },
+  {
+    "node": 4,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 9,
+      "begTime": 6,
+      "endTime": 13
+    }
+  },
+  {
+    "node": 8,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 4,
+      "begTime": 7,
+      "endTime": 12
+    }
+  },
+  {
+    "node": 6,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 8,
+      "begTime": 8,
+      "endTime": 11
+    }
+  },
+  {
+    "node": 7,
+    "dfsNodeMetadata": {
+      "disc": true,
+      "proc": true,
+      "parent": 6,
+      "begTime": 9,
+      "endTime": 10
+    }
   }
-}, {
-  "node" : 2,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 1,
-    "begTime" : 2,
-    "endTime" : 17
-  }
-}, {
-  "node" : 5,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 2,
-    "begTime" : 3,
-    "endTime" : 16
-  }
-}, {
-  "node" : 3,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 5,
-    "begTime" : 4,
-    "endTime" : 15
-  }
-}, {
-  "node" : 9,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 3,
-    "begTime" : 5,
-    "endTime" : 14
-  }
-}, {
-  "node" : 4,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 9,
-    "begTime" : 6,
-    "endTime" : 13
-  }
-}, {
-  "node" : 8,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 4,
-    "begTime" : 7,
-    "endTime" : 12
-  }
-}, {
-  "node" : 6,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 8,
-    "begTime" : 8,
-    "endTime" : 11
-  }
-}, {
-  "node" : 7,
-  "dfsNodeMetadata" : {
-    "disc" : true,
-    "proc" : true,
-    "parent" : 6,
-    "begTime" : 9,
-    "endTime" : 10
-  }
-} ]
+]

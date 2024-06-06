@@ -5,10 +5,10 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.mutable.MutableInt;
 import org.cyrano.dsa.graph.interfaces.Direction;
-import org.cyrano.dsa.graph.traversals.interfaces.Traversal;
-import org.cyrano.dsa.graph.traversals.interfaces.Visitor;
 import org.cyrano.dsa.graph.interfaces.Edge;
 import org.cyrano.dsa.graph.interfaces.Graph;
+import org.cyrano.dsa.graph.traversals.interfaces.Traversal;
+import org.cyrano.dsa.graph.traversals.interfaces.Visitor;
 
 import java.util.Iterator;
 import java.util.LinkedList;
