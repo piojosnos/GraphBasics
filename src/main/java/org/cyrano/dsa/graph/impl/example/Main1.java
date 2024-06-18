@@ -59,8 +59,8 @@ public class Main1 {
 
         // ----------------------------------------
 
-        printAdjacents(graph, 1, Direction.SOURCE_TO_TARGET);
-        printAdjacents(graph, 1, Direction.TARGET_TO_SOURCE);
+        printAdjacents(graph, 2, Direction.SOURCE_TO_TARGET);
+        printAdjacents(graph, 2, Direction.TARGET_TO_SOURCE);
 
         // ----------------------------------------
 
@@ -68,8 +68,8 @@ public class Main1 {
 
         // ----------------------------------------
 
-        printAdjacents(graph, 1, Direction.SOURCE_TO_TARGET);
-        printAdjacents(graph, 1, Direction.TARGET_TO_SOURCE);
+        printAdjacents(graph, 2, Direction.SOURCE_TO_TARGET);
+        printAdjacents(graph, 2, Direction.TARGET_TO_SOURCE);
 
         // ----------------------------------------
 
@@ -77,8 +77,8 @@ public class Main1 {
 
         // ----------------------------------------
 
-        printAdjacents(graph, 1, Direction.SOURCE_TO_TARGET);
-        printAdjacents(graph, 1, Direction.TARGET_TO_SOURCE);
+        printAdjacents(graph, 2, Direction.SOURCE_TO_TARGET);
+        printAdjacents(graph, 2, Direction.TARGET_TO_SOURCE);
     }
 
     // --------------------------------------------------------------------------------
@@ -87,7 +87,7 @@ public class Main1 {
         Iterator<Edge<Integer>> itt =
                 graph.adjacent(node, direction);
 
-        System.out.println("Adjacent of " + node + ": ");
+        System.out.println("Adjacent of " + node + ", " + direction + " : ");
 
         while (itt.hasNext()) {
             Edge<Integer> edge = itt.next();

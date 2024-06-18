@@ -88,7 +88,7 @@ public class Main2 {
         Iterator<Edge<Integer>> itt =
                 graph.adjacent(node, direction);
 
-        System.out.println("Adjacent of " + node + ": ");
+        System.out.println("Adjacent of " + node + ", " + direction + " : ");
 
         while (itt.hasNext()) {
             Edge<Integer> edge = itt.next();
